@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>res;
+        for(int i=0;i<nums.size();i++){
+            //fixing the first element and now traversing using two pointer like 2 sum problem
+            int target=-nums[i];
+            int left=i+1;
+            int right=nums.size()-1;
+            while(left<right){
+                int sum=nums[left]+nums[right];
+                if(sum<target)left++;
+                else if(sum>target)right--;
+                else{
+                    vector<int>triplet={nums[i],nums[left],nums[right]};
+                    res.push_back(triplet);
+                    //removing the duplicate elements since we have to find unique triplets
+                    //  and for sure if any element of array is similar to
+                    //   alredy there in triplrt it will cause duplicacy
+                    while(left<right && nums[left]==triplet[1])left++;
+                    while(left<right && nums[right]==triplet[2])right--;
+                }
+            }
+            while (i + 1 < nums.size() && nums[i + 1] == nums[i]) 
+                i++;
+        }
+        return res;
+    }
+};
