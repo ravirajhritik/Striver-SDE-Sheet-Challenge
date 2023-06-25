@@ -1,0 +1,19 @@
+void solve(int i,int sum,vector<int>&ans,vector<int>& arr){
+        if(i>=arr.size()){
+            ans.push_back(sum);
+            return;
+        }
+        solve(i+1,sum,ans,arr);
+        int ele=arr[i];
+        sum+=ele;
+        solve(i+1,sum,ans,arr);
+        sum-=ele;
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        // Write Your Code here
+        vector<int>output;
+        vector<int>ans;
+        solve(0,0,ans,arr);
+        return ans;
+    }
