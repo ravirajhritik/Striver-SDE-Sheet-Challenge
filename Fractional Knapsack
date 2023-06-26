@@ -1,0 +1,25 @@
+public:
+    static bool cmp(Item &x,Item &y){
+        return ((x.value*1.0)/x.weight > ((y.value*1.0)/y.weight));
+    }
+    //Function to get the maximum total value in the knapsack.
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        // Your code here
+        sort(arr,arr+n,cmp);
+        double ans=0;
+        for(int i=0;i<n;i++){
+            if(W==0)break;
+            int profit=arr[i].value;
+            int load=arr[i].weight;
+            if(load<=W){
+                ans+=profit;
+                W-=load;
+            }
+            else{
+                ans+=(profit*1.0)*W/load;
+                break;
+            }
+        }
+        return ans;
+    }
